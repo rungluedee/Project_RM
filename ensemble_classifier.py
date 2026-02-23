@@ -2,6 +2,14 @@ import lightgbm as lgb
 import joblib
 import numpy as np
 
+# เพิ่ม 3 บรรทัดนี้เพื่อแก้ปัญหาในไฟล์ .exe
+try:
+    import sklearn.ensemble._forest
+    import sklearn.ensemble._etree
+    import sklearn.tree._tree
+except ImportError:
+    pass
+
 class EnsembleClassifier:
     def __init__(self, model_paths):
         """โหลดโมเดล LGBM, RF, และ ET เข้าสู่ระบบ"""

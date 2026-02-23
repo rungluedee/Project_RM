@@ -81,3 +81,21 @@ class AdaptiveMonitor:
 
         except Exception as e:
             print(f"❌ การตอบสนองล้มเหลว: {e}")
+    def classify_behavior(self, process):
+        """วิเคราะห์พฤติกรรมเพื่อระบุประเภทมัลแวร์"""
+        try:
+            # เช็คโปรเซสลูก (Child Processes)
+            children = process.children(recursive=True)
+            for child in children:
+                if child.name().lower() in ['powershell.exe', 'cmd.exe', 'certutil.exe']:
+                    return "Trojan/Downloader (Living off the Land technique)"
+            
+            # เช็คการเปิด Network Connection
+            connections = process.connections()
+            if connections:
+                return "Potential Backdoor/Trojan (Active Network Connection)"
+                
+            # หาก Trigger Canary Trap
+            return "Potential Ransomware (Data Modification Detected)"
+        except:
+            return "Generic Malware"
