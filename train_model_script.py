@@ -5,7 +5,6 @@ import numpy as np
 import joblib
 import lightgbm as lgb
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
-# หมายเหตุ: หากต้องการใช้ SMOTE-Tomek ต้องติดตั้ง: pip install imbalanced-learn
 from imblearn.combine import SMOTETomek 
 
 if __name__ == '__main__':
